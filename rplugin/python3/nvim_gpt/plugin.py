@@ -78,7 +78,6 @@ class GPTChatPlugin(object):
 
     @pynvim.function('NewGPTBuffer')
     def gpt_chat(self, args):
-        self.messages_queue = deque(maxlen=12)
         buf_name = self.nvim.current.buffer.name
         selected_text = self.get_visual_selection()
         if "chatbuffer" in buf_name.split("/")[-1]:

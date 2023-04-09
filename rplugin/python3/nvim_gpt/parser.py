@@ -2,18 +2,33 @@ import re
 import pynvim
 
 class CommentParser:
+    #  
     def __init__(self, language, buffer, nvim):
         self.nvim = nvim
         self.language = language
         self.lang_delimiters = {
             "python": ('"""', '"""'),
             "rust": ('/*!', '*/'),
+            "javascript": ('/*', '*/'),
+            "java": ('/*', '*/'),
+            "php": ('/*', '*/'),
+            "c": ('/*', '*/'),
+            "cpp": ('/*', '*/'),
+            "go": ('/*', '*/'),
+            "swift": ('/*', '*/'),
+            "ruby": ('=begin', '=end'),
+            "lua": ('--[[', ']]'),
+            "perl": ('=pod', '=cut'),
+            "toml": ('"""', '"""'),
             # Add more languages and their delimiters here
         }
-        if language not in self.lang_delimiters:
-            raise ValueError(f"Unsupported language: {language}, but you can add it to the CommentParser Class")
 
-        self.start_delimiter, self.end_delimiter = self.lang_delimiters[language]
+        if language not in self.lang_delimiters:
+            self.language = "txt"
+            self.start_delimiter, self.end_delimiter = ("", "")
+        else:
+            self.start_delimiter, self.end_delimiter = self.lang_delimiters[language]
+
         self.start_code_block = False
         self.output = buffer
         self.output[0] = self.start_delimiter
