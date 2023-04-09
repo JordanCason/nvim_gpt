@@ -9,7 +9,7 @@ The GPT plugin for Neovim, which was quickly put together, offers a convenient w
 If you use vim-plug, add the plugin to your Neovim configuration file:
 ```
 call plug#begin()
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
+Plug 'JordanCason/nvim_gpt', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
 ```
 
